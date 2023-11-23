@@ -1,0 +1,68 @@
+import { Repository } from "typeorm"
+import { AppDataSource } from "../data-source"
+import { Request, Response } from "express"
+import { Blog } from "../entity/Blog"
+import { createBlogSchema } from "../utils/validator/BlogValidator"
+import cloudinary from "../libs/cloudinary"
+import deleteTempFiles from "../utils/uploadfiles/delete-temp-files"
+
+
+export default new class BlogServices {
+    private readonly BlogRepository: Repository<Blog> = AppDataSource.getRepository(Blog)
+
+   async find(req: Request, res: Response): Promise<Response> {
+    try{
+        const blogs = await this.BlogRepository.find();
+        return res.status(200).json(blogs);
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json({message: "something error while finding all todos"})
+    }
+   }
+
+   async findOne(req: Request, res: Response): Promise<Response> {
+    try {
+        const id: number  = Number(req.params.id)
+
+        const blog = await this.BlogRepository.findOneBy({
+            id: id
+        })
+
+        return res.status(200).json(blog);
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: "Something error while finding blog"})
+    }
+   }
+
+   async create(req: Request, res: Response): Promise<Response> {
+    try {
+        const data = req.body
+        data.image = res.locals.filename
+        data.userid = res.locals.loginSession.user.id
+        data.author = res.locals.loginSession.user.fullname
+
+        const { error, value } = createBlogSchema.validate(data)
+        if(error) return res.status(400).json({ message: error.message})
+
+        const urlImage = await cloudinary.destination(data.image)
+        deleteTempFiles()
+
+        const obj = this.BlogRepository.create({
+            title: value.title,
+            description: value.description,
+            image: urlImage,
+            user: data.userid,
+            author: data.author,
+            dateCreated: new Date()
+        })
+
+        const blog = await this.BlogRepository.save(obj)
+
+        return res.status(200).json(blog)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: "Something error while adding data"})
+    }
+   }
+}
