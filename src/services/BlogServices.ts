@@ -72,8 +72,12 @@ export default new class BlogServices {
             const data = req.body
             const id = Number(req.params.id)
             data.image = res.locals.filename
-            data.userid = res.locals.logginSession.user.id
-            data.author = res.locals.logginSession.user.fullname
+            data.userid = res.locals.loginSession.user.id
+            data.author = res.locals.loginSession.user.fullname
+
+            const oldData = await this.BlogRepository.findOne({where: {id: id}})
+            if(oldData === null) return res.status(400).json({message: "id not found"})
+            cloudinary.delete(oldData.image)
 
             const { error, value } = createBlogSchema.validate(data)
             if(error) return res.status(400).json({ message: error.message})
@@ -81,8 +85,7 @@ export default new class BlogServices {
             const urlImage = await cloudinary.destination(data.image)
             deleteTempFiles()
 
-            const oldData = await this.BlogRepository.findOne({where: {id: id}})
-            cloudinary.delete(oldData.image)
+            
 
             const blog = await this.BlogRepository.createQueryBuilder()
                                 .update(Blog)

@@ -11,7 +11,7 @@ const router = express.Router()
 const uploadMiddleware = new FileUpload("image")
 
 router.get("/blogs", BlogControllers.find)
-router.get("/blogs/:id", AuthenticationMiddlewares.Authentication, BlogControllers.findOne)
+router.get("/blogs/:id", BlogControllers.findOne)
 router.post("/blogs/add", AuthenticationMiddlewares.Authentication, uploadMiddleware.handleUpload.bind(uploadMiddleware), BlogControllers.create)
 router.patch("/blogs/:id", AuthenticationMiddlewares.Authentication, uploadMiddleware.handleUpload.bind(uploadMiddleware), BlogControllers.update)
 router.delete("/blogs/:id", AuthenticationMiddlewares.Authentication, BlogControllers.delete)
