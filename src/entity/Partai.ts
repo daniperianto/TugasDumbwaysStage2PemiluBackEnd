@@ -24,9 +24,6 @@ export default class Partai {
     @Column()
     address: string
 
-    @ManyToOne(() => Paslon, (paslon) => paslon.partai, {
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-    })
+    @ManyToOne(() => Paslon, (paslon) => paslon.partai)
     paslon: Paslon
 }

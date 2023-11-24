@@ -23,7 +23,8 @@ export default new class UserServices {
                 address: data.address,
                 username: data.username,
                 password: encryptPassword,
-                sex: data.sex
+                sex: data.sex,
+                role: "user"
             })
 
             const user = await this.UserRepository.save(obj)
@@ -56,7 +57,7 @@ export default new class UserServices {
                 fullname: isRegistered.fullname
             })
 
-            const token = jwt.sign({user}, "SECRET_KEY", { expiresIn: 3600})
+            const token = jwt.sign({user}, process.env.SECRET_KEY, { expiresIn: 3600})
 
             return res.status(200).json({user, token})
         } catch(error) {

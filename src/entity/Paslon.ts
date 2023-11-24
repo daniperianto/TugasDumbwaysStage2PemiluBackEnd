@@ -26,10 +26,7 @@ export class Paslon {
     })
     voters: Voter[]
 
-    @OneToMany(() => Partai, (partai) => partai.paslon, {
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-    })
+    @OneToMany(() => Partai, (partai) => partai.paslon)
     partai: Partai[]
 
 }

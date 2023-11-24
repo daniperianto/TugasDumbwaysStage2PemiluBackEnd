@@ -21,6 +21,9 @@ export class User {
     @Column()
     password: string
 
+    @Column()
+    role: string
+
     @OneToMany(() => Blog, (blog) => blog.user, {
         onUpdate: "CASCADE",
         onDelete: "CASCADE"
