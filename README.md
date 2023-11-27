@@ -6,12 +6,13 @@ How to use authorization
 3. Insert token on the right
 
 
-A. User
+#### A. User
 
-1. Register User
-  url       : http://localhost:5000/api/v1/user/register
-  method    : post
-  json body example :
+1. Register User<br>
+* Url : http://localhost:5000/api/v1/user/register
+* Method : `POST`
+* Json body example :
+
         {
             "fullname" : "Slamet Wilujeng",
             "address" : "Desa Kokoyashi no 3 Pulau Cocoon",
@@ -20,127 +21,138 @@ A. User
             "password" : "akusukapisang"
         }
 
-2. Login
-  url       : http://localhost:5000/api/v1/user/login
-  method    : post
-  json body example :
+2. Login<br>
+* Url       : http://localhost:5000/api/v1/user/login
+* Method    : `POST`
+* Json body example :
+
         {
             "username" : "Eslamet",
             "password" : "akusukapisang"
         }
-  note: you will received token which is used to authorization
+
+note: you will received token which is used to authorization<br>
 
 
-B. Blog
+#### B. Blog
 
-1. Getting all blogs (no authorization)
-  url       : http://localhost:5000/api/v1/blogs
-  method    : get
+1. Getting all blogs (no authorization)<br>
+* Url       : http://localhost:5000/api/v1/blogs
+* Method    : `GET`
   
-2. Getting a blog (no authorization)
-  url       : http://localhost:5000/api/v1/blogs/{{blog id}}
-  method    : get
+2. Getting a blog (no authorization)<br>
+* Url       : http://localhost:5000/api/v1/blogs/{blog-id}
+* Method    : `GET`
 
 3. Create a blog (required authorizaton)
-  url       : http://localhost:5000/api/v1/blogs/add
-  method    : post
-  form-data body example :
-    title(type: text)       = Semuanya akan indah pada waktunya
-    description(type: text) = sudah lupakan saja semua cerita, dan aku siikapku dan kamu siikapmu
-    image(type: file)       = {{insert file image}}
+* Url       : http://localhost:5000/api/v1/blogs/add
+* Method    : `GET`
+* Form-data body example :
+```
+    title       = Paslon *** Tertangkap Kamera Sedang Membeli Body Pillow Bergambar Miku
+    description = Paslon *** Tertangkap Kamera Sedang Membeli Body Pillow Bergambar Miku
+    image       = miku.png
+```
 
-4. Update a blog (required authorizaton)
-  url       : http://localhost:5000/api/v1/blogs/{{blog id}}
-  method    : patch
-  form-data body example :
-    title(type: text)       = Semuanya akan indah pada waktunya. bisa jadi
-    description(type: text) = sudah lupakan saja semua cerita, dan aku siikapku dan kamu siikapmu. iyaa iyaa
-    image(type: file)       = {{insert file image}}
+4. Update a blog (required authorizaton)<br>  
+* Url       : http://localhost:5000/api/v1/blogs/{blog-id}
+* Method    : `PATCH`
+* Form-data body example :
+```
+    title       = Paslon *** Tertangkap Kamera Sedang Membeli Body Pillow Bergambar Miku
+    description = Paslon *** Tertangkap Kamera Sedang Membeli Body Pillow Bergambar Miku
+    image       = miku.png
+```
 
-5. Delete a blog (required authorization)
-  url       : http://localhost:5000/api/v1/blogs/{{blog id}}
-  method    : delete
+5. Delete a blog (required authorization)<br>
+* Url       : http://localhost:5000/api/v1/blogs/{blog-id}
+* Method    : `DELETE`
 
 
-C. Voter
+#### C. Voter
 
-1. Getting all vote (required authorization)
-  url       : http://localhost:5000/api/v1/voters/findall
-  method    : get
+1. Getting all vote (required authorization)<br>
+* Url       : http://localhost:5000/api/v1/voters/findall
+* Method    : `GET`
 
-2. Voting (required authorization)
-  url       : http://localhost:5000/api/v1/voters/vote
-  method    : post
-  json body example :
+2. Voting (required authorization)<br>
+* Url       : http://localhost:5000/api/v1/voters/vote<br>
+* Method    : `POST`
+* Json body example :
+
         {
             "paslonNumber" : 1
         }
 
 
-D. Paslon
+#### D. Paslon
 
-1. Getting all paslon (no authorization)
-  url       : http://localhost:5000/api/v1/paslons
-  method    : get
+1. Getting all paslon (no authorization)<br>
+* Url       : http://localhost:5000/api/v1/paslons
+* Method    : `GET`
   
-2. Getting a paslon (no authorization)
-  url       : http://localhost:5000/api/v1/paslons/{{paslon id}}
-  method    : get
+2. Getting a paslon (no authorization)<br>
+* Url       : http://localhost:5000/api/v1/paslons/{paslon-id}
+* Method    : `GET`
 
 3. Create a paslon (required authorizaton)
-  url       : http://localhost:5000/api/v1/paslons/add
-  method    : post
-  form-data body example :
-    name(type: text)          = Slamet Wilujeng
-    visionMission(type: text) = Menghilangkan pinjol dari dumbways
-    image(type: file)       = {{insert file image}}
-
+* Url       : http://localhost:5000/api/v1/paslons/add
+* Method    : `POST`
+* Form-data body example :
+````
+    name          = Slamet Wilujeng
+    visionMission = Menghilangkan pinjol dari dumbways
+    image         = slamet.png
+````
 4. Update a paslon (required authorizaton)
-  url       : http://localhost:5000/api/v1/paslons/{{paslon id}}
-  method    : patch
-  form-data body example :
-    name(type: text)          = New Neo Slamet Wilujeng
-    visionMission(type: text) = Menghilangkan pinjol dari dumbways dan ****
-    image(type: file)         = {{insert file image}}
+* Url       : http://localhost:5000/api/v1/paslons/{paslon-id}
+* Method    : patch
+* Form-data body example :
+```
+    name          = New Neo Slamet Wilujeng
+    visionMission = Menghilangkan pinjol dari dumbways dan ****
+    image         = slamet.png
+```
+5. Delete a paslon (required authorization)<br>
+* Url       : http://localhost:5000/api/v1/paslons/{paslon-id}
+* Method    : `DELETE`
 
-5. Delete a paslon (required authorization)
-  url       : http://localhost:5000/api/v1/paslons/{{paslon id}}
-  method    : delete
+#### E. Partai
 
-E. Partai
-
-1. Getting all partais (no authorization)
-  url       : http://localhost:5000/api/v1/partais
-  method    : get
+1. Getting all partais (no authorization)<br>
+* Url       : http://localhost:5000/api/v1/partais
+* Method    : `GET`
   
-2. Getting a partai (no authorization)
-  url       : http://localhost:5000/api/v1/partais/{{partai id}}
-  method    : get
+2. Getting a partai (no authorization)<br>
+* Url       : http://localhost:5000/api/v1/partais/{partai-id}
+* Method    : `GET`
 
 3. Create a partai (required authorizaton)
-  url       : http://localhost:5000/api/v1/partais/add
-  method    : post
-  form-data body example :
-    name(type: text)          = PBS
-    leader(type: text)        = Slamet Wilujen
-    visionMission(type: text) = Menghijaukan bumi
-    address(type: text)       = Hutan Jaya
-    image(type: file)         = {{insert file image}}
-    paslonId(type: text)      = {{paslon id}}
-
+* Url       : http://localhost:5000/api/v1/partais/add
+* Method    : `POST`
+* Form-data body example :
+```
+    name          = PBG
+    leader        = Slamet Wilujeng
+    visionMission = Menghijaukan bumi
+    address       = Hutan Jaya
+    image         = slamet.png
+    paslonId      = 1
+```
 4. Update a partai (required authorizaton)
-  url       : http://localhost:5000/api/v1/partais/{{paslon id}}
-  method    : patch
-  form-data body example :
-    name(type: text)          = PBS
-    leader(type: text)        = Slamet Wilujen
-    visionMission(type: text) = Menghijaukan bumi
-    address(type: text)       = Hutan Jaya
-    image(type: file)         = {{insert file image}}
-    paslonId(type: text)      = {{paslon id}}
-
-5. Delete a partai (required authorization)
-  url       : http://localhost:5000/api/v1/partais/{{paslon id}}
-  method    : delete
+* Url       : http://localhost:5000/api/v1/partais/{{paslon-id}}
+* Method    : `PATCH`
+* Form-data body example :
+```
+    name          = PBG
+    leader        = Slamet Wilujeng
+    visionMission = Menghijaukan bumi
+    address       = Hutan Jaya
+    image         = slamet.png
+    paslonId      = 1
+```
+5. Delete a partai (required authorization)<br>
+* Url       : http://localhost:5000/api/v1/partais/{{paslon-id}}
+* Method    : `DELETE`
 
 
